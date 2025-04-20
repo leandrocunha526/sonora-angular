@@ -1,0 +1,26 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.main-content {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.active-link {
+  background-color: rgba(0, 0, 0, 0.04);
+  font-weight: bold;
+  border-left: 4px solid #1976d2;
+  /* Azul padrão do Material */
+}

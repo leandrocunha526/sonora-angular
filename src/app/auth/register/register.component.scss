@@ -1,0 +1,52 @@
+.full-width {
+  width: 100%;
+}
+
+.error-message {
+  color: #f44336;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 600px;
+  /* Adicionando um limite máximo para a largura */
+}
+
+.field-error {
+  color: #f44336;
+  font-size: 13px;
+  margin-bottom: 5px;
+  /* Ajustando a margem para não sobrepor os campos */
+  margin-top: 4px;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+  /* Garantindo que haja espaçamento entre os campos */
+}
+
+.back-to-login {
+  margin-top: 1.5rem;
+  /* Aumentando o espaço entre o botão de submit e o link de login */
+  text-align: center;
+
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

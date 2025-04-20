@@ -1,0 +1,59 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Entrar no sistema</mat-card-title>
+      <mat-card-subtitle>Por favor, insira suas credenciais</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <!-- Username Field -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nome de Usuário</mat-label>
+          <input matInput formControlName="username" required />
+          <mat-error *ngIf="username?.invalid && username?.touched"
+            >Nome de usuário é obrigatório</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="password" required />
+          <mat-error *ngIf="password?.invalid && password?.touched"
+            >Senha é obrigatória</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Mensagem de erro da API -->
+        <mat-error *ngIf="loginError" class="api-error">
+          {{ loginError }}
+        </mat-error>
+
+        <div class="button-container">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="loginForm.invalid || isLoading"
+          >
+            <ng-container *ngIf="!isLoading; else loadingTpl"
+              >Entrar</ng-container
+            >
+            <ng-template #loadingTpl>
+              <mat-progress-spinner
+                diameter="20"
+                mode="indeterminate"
+                color="accent"
+              ></mat-progress-spinner>
+            </ng-template>
+          </button>
+        </div>
+      </form>
+
+      <!-- Link para Registro -->
+      <div class="register-link">
+        <a routerLink="/register">Não tem uma conta? Registre-se aqui.</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

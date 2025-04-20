@@ -1,0 +1,51 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+mat-card {
+  width: 400px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+mat-progress-spinner {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.register-link a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.api-error {
+  color: red;
+  margin-top: 8px;
+  display: block;
+  text-align: center;
+}
