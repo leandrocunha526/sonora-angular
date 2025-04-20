@@ -34,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CityManagerComponent } from './city/city-manager/city-manager.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { CpfPipe } from './cpf.pipe';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     CityManagerComponent,
     UserComponent,
     UserEditComponent,
+    CpfPipe,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     FormsModule,
     ReactiveFormsModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [
     {
@@ -80,8 +82,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
       multi: true,
     },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    provideNgxMask()
+    provideNgxMask(),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

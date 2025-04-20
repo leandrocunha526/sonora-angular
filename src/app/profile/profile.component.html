@@ -1,1 +1,35 @@
-<p>profile works!</p>
+<div class="profile-container" *ngIf="profile">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title>Seu perfil</mat-card-title>
+      <mat-card-subtitle>Olá, {{ profile.name }}!</mat-card-subtitle>
+      <mat-card-subtitle>Seu código: {{ profile.id }}</mat-card-subtitle>
+      <mat-card-subtitle
+        >Seu nome de usuário: {{ profile.username }}</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>CPF:</strong> {{ profile.cpf | cpf }}</p>
+      <p>
+        <strong>Papel de usuário:</strong>
+        {{ profile.role }}
+      </p>
+
+      <div class="role-info" *ngIf="profile.role === 'ADMIN'">
+        <p>✔️ Você é um <strong>administrador</strong>.</p>
+        <p>Tem acesso completo: usuários, cidades, produtos, etc.</p>
+      </div>
+
+      <div class="role-info" *ngIf="profile.role === 'USER'">
+        <p>👤 Você é um <strong>usuário comum</strong>.</p>
+        <p>Tem acesso apenas a: cidades e produtos.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="loading" *ngIf="!profile">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Carregando perfil...</p>
+</div>

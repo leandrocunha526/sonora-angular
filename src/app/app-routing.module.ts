@@ -9,6 +9,7 @@ import { UserComponent } from './user/user.component';
 import { CityComponent } from './city/city.component';
 import { ProductComponent } from './product/product.component';
 import { EditProductComponent } from './product/edit-product/edit-product.component';
+import { CityManagerComponent } from './city/city-manager/city-manager.component';
 
 const routes: Routes = [
   // Rotas públicas
@@ -16,13 +17,21 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   // Rota protegida
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
 
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
-  { path: 'product/edit/:id', component: EditProductComponent, canActivate: [AuthGuard] },
-
+  {
+    path: 'product/edit/:id',
+    component: EditProductComponent,
+    canActivate: [AuthGuard],
+  },
 
   { path: 'city', component: CityComponent, canActivate: [AuthGuard] },
+  { path: 'cities', component: CityManagerComponent, canActivate: [AuthGuard] },
 
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
 
@@ -34,6 +43,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
