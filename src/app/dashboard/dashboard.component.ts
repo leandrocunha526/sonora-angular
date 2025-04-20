@@ -10,21 +10,22 @@ import { Router } from '@angular/router';
   selector: 'app-dashboard',
   standalone: false,
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  pagedProducts: Product[] = [];
 
   searchTerm: string = '';
-  currentPage: number = 0; // MatPaginator usa índice baseado em 0
+  currentPage: number = 0;
   itemsPerPage: number = 10;
 
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -39,35 +40,33 @@ export class DashboardComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         console.error('Erro ao carregar produtos:', err);
         this.showError('Erro ao carregar produtos.');
-      }
+      },
     });
   }
 
   applyFilter(): void {
-    const filtered = this.products.filter(product =>
+    this.filteredProducts = this.products.filter((product) =>
       product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
 
-    this.filteredProducts = filtered.slice(
-      this.currentPage * this.itemsPerPage,
-      (this.currentPage + 1) * this.itemsPerPage
-    );
+    this.updatePagedProducts();
   }
 
-  onSearchChange(): void {
-    this.currentPage = 0;
-    this.applyFilter();
+  updatePagedProducts(): void {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.pagedProducts = this.filteredProducts.slice(startIndex, endIndex);
   }
 
   onPageChange(event: PageEvent): void {
-    try {
-      this.currentPage = event.pageIndex;
-      this.itemsPerPage = event.pageSize;
-      this.applyFilter();
-    } catch (error) {
-      this.showError('Erro ao mudar de página.');
-      console.error(error);
-    }
+    this.currentPage = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.updatePagedProducts();
+  }
+
+  onSearch(): void {
+    this.currentPage = 0;
+    this.applyFilter();
   }
 
   editProduct(product: Product): void {
@@ -83,7 +82,7 @@ export class DashboardComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         console.error('Erro ao excluir produto:', err);
         this.showError('Erro ao excluir produto.');
-      }
+      },
     });
   }
 
@@ -99,11 +98,5 @@ export class DashboardComponent implements OnInit {
       duration: 4000,
       panelClass: ['error-snackbar'],
     });
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.products.filter(product =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    ).length / this.itemsPerPage);
   }
 }

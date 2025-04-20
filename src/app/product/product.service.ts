@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from './interfaces/Product'
+import { Product } from './interfaces/Product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
   private API_URL = 'http://localhost:8080/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Obtém todos os produtos cadastrados
@@ -52,10 +52,19 @@ export class ProductService {
   }
 
   /**
-   * Obtém produtos por cidade
-   * @param cityId ID da cidade
+   * Obtém estados
+   * @param para obter estados da API
    */
   getCities(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8080/cities');
+  }
+
+  search(name?: string): Observable<Product[]> {
+    let params = new HttpParams();
+    if (name) {
+      params = params.set('name', name);
+    }
+
+    return this.http.get<Product[]>(this.API_URL, { params });
   }
 }
