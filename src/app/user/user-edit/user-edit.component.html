@@ -1,1 +1,82 @@
-<p>user-edit works!</p>
+<div class="card">
+  <div class="card-header">
+    <h3>Editar Usuário</h3>
+    <p>Recurso exclusivo para administradores!</p>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="userForm" (ngSubmit)="onUpdate()">
+      <!-- Nome -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="userForm.get('name')?.hasError('required')"
+          >Nome é obrigatório.</mat-error
+        >
+        <mat-error *ngIf="userForm.get('name')?.hasError('maxlength')"
+          >Máximo de 100 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Nome de Usuário -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome de Usuário</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="userForm.get('username')?.hasError('required')"
+          >Nome de usuário é obrigatório.</mat-error
+        >
+        <mat-error *ngIf="userForm.get('username')?.hasError('maxlength')"
+          >Máximo de 100 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <!-- CPF -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          formControlName="cpf"
+          mask="000.000.000-00"
+          [dropSpecialCharacters]="true"
+        />
+        <mat-error *ngIf="userForm.get('cpf')?.hasError('required')"
+          >CPF é obrigatório.</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Papel (Role) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Papel</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="ADMIN">Admin</mat-option>
+          <mat-option value="USER">User</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('role')?.hasError('required')"
+          >Papel é obrigatório.</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Senha -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="userForm.get('password')?.hasError('required')"
+          >Senha é obrigatória.</mat-error
+        >
+        <mat-error *ngIf="userForm.get('password')?.hasError('minlength')"
+          >Mínimo de 6 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Ações -->
+      <div class="actions">
+        <button mat-flat-button color="primary" [disabled]="userForm.invalid">
+          Salvar
+        </button>
+        <button mat-stroked-button color="warn" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
