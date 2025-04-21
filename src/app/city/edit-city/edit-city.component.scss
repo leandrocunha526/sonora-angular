@@ -1,0 +1,16 @@
+.edit-city-container {
+  max-width: 500px;
+  margin: 32px auto;
+  padding: 16px;
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+}

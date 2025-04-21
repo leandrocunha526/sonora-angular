@@ -10,7 +10,7 @@ import { State } from './interfaces/State';
 export class CityService {
   private API_URL = 'http://localhost:8080/cities';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   add(city: City): Observable<City> {
     return this.http.post<City>(`${this.API_URL}`, city);
@@ -26,5 +26,17 @@ export class CityService {
 
   delete(id: number) {
     return this.http.delete<void>(`${this.API_URL}/${id}`);
+  }
+
+  findById(id: number): Observable<City> {
+    return this.http.get<City>(`${this.API_URL}/${id}`);
+  }
+
+  update(id: number, city: City): Observable<City> {
+    return this.http.put<City>(`${this.API_URL}/${id}`, city);
+  }
+
+  findByName(name: string): Observable<City[]> {
+    return this.http.get<City[]>(`${this.API_URL}/search`, { params: { name } });
   }
 }

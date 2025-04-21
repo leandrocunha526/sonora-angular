@@ -29,9 +29,33 @@ export class CityManagerComponent {
     this.loadCities();
   }
 
+  onSearch(name: string): void {
+    this.searchTerm = name;
+
+    if (!name.trim()) {
+      this.loadCities(); // se o campo foi limpo, recarrega tudo
+      return;
+    }
+
+    this.cityService.findByName(name).subscribe({
+      next: (data) => {
+        this.cities = data;
+        this.pageIndex = 0; // resetar página
+        this.applyFilterAndPagination();
+      },
+      error: (err) => {
+        this.snackBar.open('Erro ao buscar cidades: ' + err.error.message, 'Fechar', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+
+
   loadCities() {
     this.cityService.findAll().subscribe((data) => {
       this.cities = data;
+      this.pageIndex = 0;
       this.applyFilterAndPagination();
     });
   }
@@ -60,10 +84,6 @@ export class CityManagerComponent {
       });
     }
   }
-  onSearch() {
-    this.pageIndex = 0;
-    this.applyFilterAndPagination();
-  }
 
   onPageChange(event: PageEvent) {
     this.pageIndex = event.pageIndex;
@@ -86,6 +106,6 @@ export class CityManagerComponent {
   }
 
   editCity(city: City): void {
-    this.router.navigate(['/products/edit', city.id]);
+    this.router.navigate(['/cities/edit', city.id]);
   }
 }

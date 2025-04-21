@@ -5,8 +5,12 @@
     <input
       type="search"
       matInput
+      #searchInput
       [(ngModel)]="searchTerm"
-      (input)="onSearch()"
+      (input)="
+        searchInput.value.trim() ? onSearch(searchInput.value) : loadCities()
+      "
+      placeholder="Digite o nome da cidade"
     />
   </mat-form-field>
 
@@ -27,7 +31,9 @@
       <!-- Estado -->
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let city">{{ city.state }}</td>
+        <td mat-cell *matCellDef="let city">
+          {{ city.state }}
+        </td>
       </ng-container>
 
       <!-- Ações -->
@@ -55,7 +61,7 @@
   </div>
 
   <div *ngIf="cities.length === 0" class="no-cities-message">
-    <p>Nenhuma cidade cadastrada no sistema.</p>
+    <p>Nenhuma cidade cadastrada no sistema</p>
   </div>
 
   <div
