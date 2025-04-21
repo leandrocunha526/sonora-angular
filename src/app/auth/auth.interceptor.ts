@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403 || error.status === 500) {
+        if (error.status === 401 || error.status === 403) {
           this.snackBar.open('Ocorreu um erro com seu login. Por favor, tente novamente.', 'Fechar', {
             duration: 4000,
             panelClass: ['error-snackbar'],
