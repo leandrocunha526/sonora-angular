@@ -11,10 +11,13 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-
   private readonly TOKEN_KEY = 'token';
   private readonly API_URL = 'http://localhost:8080/auth';
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   login(credentials: { username: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.API_URL}/login`, credentials).pipe(
@@ -33,15 +36,37 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
-  }
-
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
   isLoggedIn(): boolean {
     return this.isAuthenticated();
+  }
+
+  decodeToken(): any {
+    const token = this.getToken();
+    if (!token) return null;
+    const payload = token.split('.')[1];
+    try {
+      return JSON.parse(atob(payload));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  getRole(): string | null {
+    const decoded = this.decodeToken();
+    const authority = decoded?.authorities?.[0];
+    if (!authority) return null;
+    return authority.replace('ROLE_', '');
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'ADMIN';
   }
 }

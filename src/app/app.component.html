@@ -19,7 +19,11 @@
       <a mat-list-item routerLink="/city" routerLinkActive="active-link"
         >Cadastrar cidades</a
       >
-      <a mat-list-item routerLink="/user" routerLinkActive="active-link"
+      <a
+        mat-list-item
+        routerLink="/user"
+        routerLinkActive="active-link"
+        *ngIf="authService.isAdmin()"
         >Gerenciar usuários</a
       >
       <a mat-list-item routerLink="/profile" routerLinkActive="active-link"

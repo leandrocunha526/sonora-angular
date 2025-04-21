@@ -34,12 +34,10 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error.status === 401 || error.status === 403) {
           this.snackBar.open('Ocorreu um erro com seu login. Por favor, tente novamente.', 'Fechar', {
             duration: 4000,
-            panelClass: ['error-snackbar'],
           });
           localStorage.removeItem('token');
           this.router.navigate(['/login']);
         }
-
         return throwError(() => error);
       })
     );

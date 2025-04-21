@@ -11,7 +11,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class AppComponent {
   title = 'Sonora Angular';
   isSmallScreen = false;
-  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver) {
+
+  constructor(public authService: AuthService, private breakpointObserver: BreakpointObserver) {
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
       this.isSmallScreen = result.matches;
     });
