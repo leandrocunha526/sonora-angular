@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Profile } from './interfaces/Profile';
-import { ProfileService } from './profile.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,12 +13,12 @@ export class ProfileComponent {
   profile: Profile | null = null;
 
   constructor(
-    private profileService: ProfileService,
+    private userService: UserService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.profileService.getProfile().subscribe({
+    this.userService.getProfile().subscribe({
       next: (data) => {
         this.profile = data;
       },
@@ -26,7 +26,6 @@ export class ProfileComponent {
         console.error('Erro ao carregar perfil', err);
         this.snackBar.open('Erro ao carregar perfil', 'Fechar', {
           duration: 3000,
-          panelClass: ['error-snackbar'],
         });
       },
     });
