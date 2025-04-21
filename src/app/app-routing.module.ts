@@ -25,7 +25,7 @@ const routes: Routes = [
 
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   {
-    path: 'product/edit/:id',
+    path: 'products/edit/:id',
     component: EditProductComponent,
     canActivate: [AuthGuard],
   },
@@ -45,4 +45,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
