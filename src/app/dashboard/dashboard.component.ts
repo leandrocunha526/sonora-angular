@@ -45,11 +45,10 @@ export class DashboardComponent implements OnInit {
   }
 
   applyFilter(): void {
-    this.filteredProducts = this.products.filter((product) =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-
-    this.updatePagedProducts();
+    this.productService.search(this.searchTerm).subscribe((products) => {
+      this.filteredProducts = products;
+      this.updatePagedProducts();
+    });
   }
 
   updatePagedProducts(): void {
@@ -89,14 +88,12 @@ export class DashboardComponent implements OnInit {
   showSuccess(message: string): void {
     this.snackBar.open(message, 'Fechar', {
       duration: 3000,
-      panelClass: ['success-snackbar'],
     });
   }
 
   showError(message: string): void {
     this.snackBar.open(message, 'Fechar', {
       duration: 4000,
-      panelClass: ['error-snackbar'],
     });
   }
 }
