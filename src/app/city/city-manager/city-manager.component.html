@@ -1,13 +1,23 @@
-<div class="dashboard-container">
+<div class="cities-container">
   <!-- Campo de pesquisa -->
   <mat-form-field appearance="outline" class="search-field">
     <mat-label>Pesquisar cidade</mat-label>
-    <input matInput [(ngModel)]="searchTerm" (input)="onSearch()" />
+    <input
+      type="search"
+      matInput
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+    />
   </mat-form-field>
 
-  <!-- Tabela -->
+  <!-- Tabela de Produtos -->
   <div style="overflow-x: auto">
-    <table mat-table [dataSource]="filteredCities" class="mat-elevation-z2">
+    <table mat-table [dataSource]="pagedCities" class="mat-elevation-z2">
+      <!--- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let city">{{ city.id }}</td>
+      </ng-container>
       <!-- Nome -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -23,27 +33,44 @@
       <!-- Ações -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
-        <td mat-cell *matCellDef="let city" class="actions-cell">
-          <div class="actions-wrapper">
-            <button
-              mat-stroked-button
-              color="warn"
-              (click)="deleteCity(city)"
-              class="small-button"
-            >
-              Excluir
-            </button>
-          </div>
+        <td mat-cell *matCellDef="let city">
+          <button mat-stroked-button color="primary" (click)="editCity(city)">
+            Editar
+          </button>
+          <button mat-stroked-button color="warn" (click)="deleteCity(city)">
+            Excluir
+          </button>
         </td>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['id', 'name', 'state', 'actions']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['id', 'name', 'state', 'actions']"
+      ></tr>
     </table>
   </div>
 
-  <!-- Nenhuma cidade -->
-  <div *ngIf="filteredCities.length === 0">
-    <p>Nenhuma cidade encontrada.</p>
+  <div *ngIf="cities.length === 0" class="no-cities-message">
+    <p>Nenhuma cidade cadastrada no sistema.</p>
   </div>
+
+  <div
+    *ngIf="cities.length > 0 && filteredCities.length === 0"
+    class="no-cities-message"
+  >
+    <p>Nenhum resultado encontrado para "{{ searchTerm }}".</p>
+  </div>
+
+  <!-- Paginação -->
+  <mat-paginator
+    [length]="filteredCities.length"
+    [pageSize]="itemsPerPage"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
 </div>
