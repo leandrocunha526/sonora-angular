@@ -1,0 +1,30 @@
+.product-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 16px;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 600px;
+  /* Garante que o card tenha uma largura máxima */
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Estilos para inputs responsivos */
+mat-form-field {
+  width: 100%;
+}
