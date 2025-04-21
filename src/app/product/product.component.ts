@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    private snackBar: MatSnackBar  // Injetando o MatSnackBar
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -38,13 +38,11 @@ export class ProductComponent implements OnInit {
         next: () => {
           this.snackBar.open('Produto salvo com sucesso!', 'Fechar', {
             duration: 3000, // A duração do snack bar em milissegundos
-            panelClass: ['success-snackbar'] // Classe opcional para customizar o estilo
           });
         },
         error: err => {
           this.snackBar.open('Erro ao salvar: ' + err.error.message, 'Fechar', {
             duration: 3000, // A duração do snack bar em milissegundos
-            panelClass: ['error-snackbar'] // Classe opcional para customizar o estilo
           });
         }
       });
