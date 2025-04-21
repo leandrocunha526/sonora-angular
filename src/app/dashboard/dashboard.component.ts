@@ -19,13 +19,13 @@ export class DashboardComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 0;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
 
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
