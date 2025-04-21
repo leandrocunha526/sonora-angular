@@ -1,0 +1,39 @@
+.dashboard-container {
+  padding: 16px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  padding: 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td.mat-cell.actions-cell {
+  white-space: nowrap;
+}
+
+.actions-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.small-button {
+  padding: 2px 8px;
+  font-size: 12px;
+  min-width: unset; // remove o tamanho mínimo padrão
+  line-height: 1.4;
+}
