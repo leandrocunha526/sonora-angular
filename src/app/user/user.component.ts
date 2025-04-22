@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserDetailsModalComponent } from './user-details-modal/user-details-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user',
@@ -24,7 +26,8 @@ export class UserComponent {
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +81,7 @@ export class UserComponent {
     if (confirmDelete) {
       this.userService.delete(user.id).subscribe({
         next: () => {
-          this.showSuccess('Produto excluído com sucesso.');
+          this.showSuccess('Usuário excluído com sucesso.');
           this.loadProducts();
         },
         error: (err: HttpErrorResponse) => {
@@ -98,6 +101,13 @@ export class UserComponent {
   showError(message: string): void {
     this.snackBar.open(message, 'Fechar', {
       duration: 4000,
+    });
+  }
+
+  openUserDetails(userId: number): void {
+    this.dialog.open(UserDetailsModalComponent, {
+      width: '400px',
+      data: userId
     });
   }
 }
