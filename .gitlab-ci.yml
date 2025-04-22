@@ -1,5 +1,6 @@
 stages:
   - install
+  - build
   - test
 
 variables:
@@ -22,10 +23,19 @@ install_dependencies:
   script:
     - echo "Dependencies installed"
 
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+
 test:
   stage: test
   script:
-    - npm run test -- --watch=false --browsers=ChromeHeadless
+    - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
   artifacts:
     paths:
       - coverage/
