@@ -44,6 +44,8 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
+__TESTS NOTE: 5 tests were inserted for login and interceptor.__
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
