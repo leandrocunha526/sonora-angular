@@ -35,6 +35,10 @@ import { CityManagerComponent } from './city/city-manager/city-manager.component
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { CpfPipe } from './cpf.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailsModalComponent } from './product/product-details-modal/product-details-modal.component';
+import { CityDetailsModalComponent } from './city/city-details-modal/city-details-modal.component';
+import { UserDetailsModalComponent } from './user/user-details-modal/user-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,9 @@ import { CpfPipe } from './cpf.pipe';
     UserComponent,
     UserEditComponent,
     CpfPipe,
+    ProductDetailsModalComponent,
+    CityDetailsModalComponent,
+    UserDetailsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +81,7 @@ import { CpfPipe } from './cpf.pipe';
     ReactiveFormsModule,
     MatOptionModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   providers: [
     {
