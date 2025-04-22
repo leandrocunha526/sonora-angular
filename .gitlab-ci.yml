@@ -6,7 +6,7 @@ stages:
 variables:
   CHROME_BIN: "/usr/bin/google-chrome"
 
-image: node:18
+image: node:22
 
 before_script:
   - apt-get update
