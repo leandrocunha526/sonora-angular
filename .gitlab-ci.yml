@@ -1,0 +1,33 @@
+stages:
+  - install
+  - test
+
+variables:
+  CHROME_BIN: "/usr/bin/google-chrome"
+
+image: node:18
+
+before_script:
+  - apt-get update
+  - apt-get install -y wget gnupg
+  - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+  - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+  - apt-get update
+  - apt-get install -y google-chrome-stable
+  - npm install -g @angular/cli
+  - npm ci
+
+install_dependencies:
+  stage: install
+  script:
+    - echo "Dependencies installed"
+
+test:
+  stage: test
+  script:
+    - npm run test -- --watch=false --browsers=ChromeHeadless
+  artifacts:
+    paths:
+      - coverage/
+    reports:
+      junit: coverage/junit-report.xml
