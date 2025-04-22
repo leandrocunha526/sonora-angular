@@ -6,8 +6,9 @@
 }
 
 .search-field {
-  width: 100%;
-  margin-bottom: 10px;
+  width: 80%;
+  margin: 0 auto 5px auto;
+  display: block;
 }
 
 table {
@@ -43,7 +44,7 @@ mat-row {
   text-align: center;
   color: #666;
   margin-top: 20px;
-  font-style: italic;
+  font-style: normal;
 }
 
 .pagination {

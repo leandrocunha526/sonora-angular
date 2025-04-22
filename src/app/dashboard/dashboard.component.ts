@@ -5,6 +5,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailsModalComponent } from '../product/product-details-modal/product-details-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +26,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -94,6 +97,13 @@ export class DashboardComponent implements OnInit {
   showError(message: string): void {
     this.snackBar.open(message, 'Fechar', {
       duration: 4000,
+    });
+  }
+
+  openProductDetails(productId: number): void {
+    this.dialog.open(ProductDetailsModalComponent, {
+      width: '400px',
+      data: productId
     });
   }
 }
