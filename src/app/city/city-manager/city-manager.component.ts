@@ -4,6 +4,8 @@ import { City } from '../interfaces/City';
 import { CityService } from '../city.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { CityDetailsModalComponent } from '../city-details-modal/city-details-modal.component';
 
 @Component({
   selector: 'app-city-manager',
@@ -23,6 +25,7 @@ export class CityManagerComponent {
     private cityService: CityService,
     private snackBar: MatSnackBar,
     private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -107,5 +110,12 @@ export class CityManagerComponent {
 
   editCity(city: City): void {
     this.router.navigate(['/cities/edit', city.id]);
+  }
+
+  openProductDetails(cityId: number): void {
+    this.dialog.open(CityDetailsModalComponent, {
+      width: '400px',
+      data: cityId
+    });
   }
 }

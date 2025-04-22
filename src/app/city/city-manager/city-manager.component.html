@@ -41,10 +41,13 @@
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let city">
           <button mat-stroked-button color="primary" (click)="editCity(city)">
-            Editar
+            <mat-icon>edit</mat-icon> Editar
           </button>
           <button mat-stroked-button color="warn" (click)="deleteCity(city)">
-            Excluir
+            <mat-icon>delete</mat-icon> Excluir
+          </button>
+          <button mat-stroked-button (click)="openProductDetails(city.id)">
+            <mat-icon>visibility</mat-icon> Detalhes
           </button>
         </td>
       </ng-container>
