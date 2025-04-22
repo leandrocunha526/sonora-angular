@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Detalhes da Cidade</h2>
+
+<mat-dialog-content *ngIf="loading"> Carregando... </mat-dialog-content>
+
+<mat-dialog-content *ngIf="error">
+  {{ error }}
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="!loading && !error">
+  <p><strong>ID:</strong> {{ city.id }}</p>
+  <p><strong>Nome:</strong> {{ city.name }}</p>
+  <p><strong>Estado:</strong> {{ city.state }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Fechar</button>
+</mat-dialog-actions>
