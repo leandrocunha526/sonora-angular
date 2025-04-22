@@ -1,11 +1,16 @@
+/* Cartão principal */
 .card {
   max-width: 600px;
+  width: 100%;
   margin: 20px auto;
+  padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
+/* Cabeçalho do cartão */
 .card-header {
   padding: 16px;
   background-color: #3f51b5;
@@ -16,6 +21,7 @@
   border-top-right-radius: 8px;
 }
 
+/* Corpo do cartão */
 .card-body {
   padding: 20px;
 }
@@ -38,17 +44,25 @@ mat-form-field .mat-error {
   font-size: 0.875rem;
 }
 
+/* Formatação do campo de senha */
+mat-form-field input[type="password"] {
+  font-size: 1rem;
+}
+
+/* Estilo para erros */
+mat-error {
+  color: #f44336;
+  font-size: 0.875rem;
+}
+
+/* Estilo do mat-select */
+.mat-select .mat-select-trigger {
+  font-size: 1rem;
+}
+
 /* Estilos para os botões */
 button {
   margin-right: 8px;
-}
-
-button.mat-flat-button {
-  width: 100%;
-}
-
-button.mat-stroked-button {
-  width: 100%;
 }
 
 /* Estilo do botão de cancelamento */
@@ -57,46 +71,15 @@ button.mat-stroked-button {
   color: white;
 }
 
-/* Estilo para os botões de ação no formulário */
+/* Estilo para o container de botões */
 .actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 8px;
   margin-top: 16px;
 }
 
-/* Adiciona um pequeno espaçamento entre os campos do formulário */
-mat-form-field {
-  margin-bottom: 16px;
-}
-
-/* Estilos para o erro de formatação de campo */
-mat-error {
-  color: #f44336;
-  /* Vermelho para destacar erros */
-  font-size: 0.875rem;
-}
-
-.mat-select .mat-select-trigger {
-  font-size: 1rem;
-}
-
-/* Formatação do campo de senha */
-mat-form-field input[type="password"] {
-  font-size: 1rem;
-}
-
-@media (max-width: 600px) {
-  .card {
-    margin: 10px;
-  }
-
-  button.mat-flat-button,
-  button.mat-stroked-button {
-    width: 100%;
-  }
-
-  .actions {
-    flex-direction: column;
-    gap: 8px;
-  }
+.actions button {
+  flex: 1 1 48%;
 }
