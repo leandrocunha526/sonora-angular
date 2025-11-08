@@ -1,0 +1,61 @@
+name: Angular CI
+
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    env:
+      CHROME_BIN: /usr/bin/google-chrome
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      # Install Google Chrome
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install -g @angular/cli
+          npm ci
+
+      # Build project
+      - name: Build project
+        run: npm run build
+
+      # Tests (Karma)
+      - name: Run tests
+        run: npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+
+      - name: Upload coverage report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
