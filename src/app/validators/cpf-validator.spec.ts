@@ -52,7 +52,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '123456789'
+        cleaned: '123456789',
       });
     });
 
@@ -61,7 +61,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: ''
+        cleaned: '',
       });
     });
 
@@ -70,7 +70,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '00000000000'
+        cleaned: '00000000000',
       });
     });
 
@@ -79,7 +79,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '11111111111'
+        cleaned: '11111111111',
       });
     });
 
@@ -88,7 +88,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '11144477745'
+        cleaned: '11144477745',
       });
     });
 
@@ -97,7 +97,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '11144477734'
+        cleaned: '11144477734',
       });
     });
 
@@ -106,7 +106,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '11144477700'
+        cleaned: '11144477700',
       });
     });
 
@@ -115,7 +115,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '123456789012'
+        cleaned: '123456789012',
       });
     });
 
@@ -124,7 +124,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '1234567'
+        cleaned: '1234567',
       });
     });
   });
@@ -135,7 +135,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: ''
+        cleaned: '',
       });
     });
 
@@ -144,7 +144,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: ''
+        cleaned: '',
       });
     });
   });
@@ -155,7 +155,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: ''
+        cleaned: '',
       });
     });
 
@@ -164,7 +164,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: ''
+        cleaned: '',
       });
     });
 
@@ -173,7 +173,7 @@ describe('cpfValidatorDetailed', () => {
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '11177735'
+        cleaned: '11177735',
       });
     });
   });
@@ -182,14 +182,14 @@ describe('cpfValidatorDetailed', () => {
     it('should be reusable across multiple controls', () => {
       const control1 = new FormControl('11144477735');
       const control2 = new FormControl('52998224725');
-      
+
       expect(validator(control1)).toBeNull();
       expect(validator(control2)).toBeNull();
     });
 
     it('should provide consistent results for same input', () => {
       const control = new FormControl('11144477735');
-      
+
       expect(validator(control)).toBeNull();
       expect(validator(control)).toBeNull();
       expect(validator(control)).toBeNull();
@@ -198,12 +198,12 @@ describe('cpfValidatorDetailed', () => {
     it('should update validation when control value changes', () => {
       const control = new FormControl('11144477735');
       expect(validator(control)).toBeNull();
-      
+
       control.setValue('00000000000');
       const result = validator(control);
       expect(result).toEqual({
         cpfInvalid: true,
-        cleaned: '00000000000'
+        cleaned: '00000000000',
       });
     });
   });
@@ -213,14 +213,14 @@ describe('cpfValidatorDetailed', () => {
       const control = new FormControl('invalid');
       const result = validator(control);
       expect(result).toBeTruthy();
-      expect(result!.cpfInvalid).toBe(true);
+      expect(result!['cpfInvalid']).toBe(true);
     });
 
     it('should always include cleaned value in error object', () => {
       const control = new FormControl('111.444.777-00');
       const result = validator(control);
       expect(result).toBeTruthy();
-      expect(result!.cleaned).toBe('11144477700');
+      expect(result!['cleaned']).toBe('11144477700');
     });
   });
 
@@ -261,15 +261,15 @@ describe('cpfValidatorDetailed', () => {
         '66666666666',
         '77777777777',
         '88888888888',
-        '99999999999'
+        '99999999999',
       ];
 
-      repeatedPatterns.forEach(pattern => {
+      repeatedPatterns.forEach((pattern) => {
         const control = new FormControl(pattern);
         const result = validator(control);
         expect(result).toEqual({
           cpfInvalid: true,
-          cleaned: pattern
+          cleaned: pattern,
         });
       });
     });
