@@ -54,8 +54,6 @@ export class RegisterComponent {
       name: formValue.name,
       username: formValue.username,
       cpf: formValue.cpf,
-      // Existe a possíbilidade de uso de replace(/\D/g, ''), ao invés de [dropSpecialCharacters]="true"
-      // para remove a máscara
       password: formValue.password,
     };
 
@@ -65,7 +63,7 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.error =
-          err.error.message || 'Erro ao registrar usuário. Tente novamente.';
+          err.error?.message ?? 'Erro ao registrar usuário. Tente novamente.';
         this.isSubmitting = false;
       },
     });

@@ -39,12 +39,7 @@
         <!-- CPF -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>CPF</mat-label>
-          <input
-            matInput
-            formControlName="cpf"
-            mask="000.000.000-00"
-            [dropSpecialCharacters]="true"
-          />
+          <input matInput formControlName="cpf" mask="000.000.000-00" />
           <mat-error
             *ngIf="
               registerForm.get('cpf')?.hasError('required') &&
