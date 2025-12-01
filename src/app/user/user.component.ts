@@ -85,8 +85,7 @@ export class UserComponent {
           this.loadProducts();
         },
         error: (err: HttpErrorResponse) => {
-          console.error('Erro ao excluir produto:', err);
-          this.showError('Erro ao excluir produto.');
+          this.showError('Erro ao excluir usuário.');
         },
       });
     }

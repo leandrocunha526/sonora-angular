@@ -39,12 +39,7 @@
         <!-- CPF -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>CPF</mat-label>
-          <input
-            matInput
-            formControlName="cpf"
-            mask="000.000.000-00"
-            [dropSpecialCharacters]="true"
-          />
+          <input matInput formControlName="cpf" mask="000.000.000-00" />
           <mat-error
             *ngIf="
               registerForm.get('cpf')?.hasError('required') &&
@@ -53,8 +48,15 @@
           >
             CPF é obrigatório
           </mat-error>
+          <mat-error
+            *ngIf="
+              registerForm.get('cpf')?.dirty &&
+              registerForm.get('cpf')?.hasError('cpfInvalid')
+            "
+          >
+            CPF inválido.
+          </mat-error>
         </mat-form-field>
-
         <!-- Senha -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Senha</mat-label>
@@ -100,6 +102,9 @@
           <ng-template #text>Registrar</ng-template>
         </button>
 
+        <div class="spacer">
+          <mat-divider></mat-divider>
+        </div>
         <!-- Voltar para login -->
         <div class="back-to-login">
           <span>Já tem uma conta?</span>
